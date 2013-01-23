@@ -105,6 +105,7 @@
                 y = -centroid[1];
                 k = 4;
                 centered = d;
+                toastr.success(d.properties.name + ' County');
             } else {
                 centered = null;
             }
@@ -115,6 +116,7 @@
                 .duration(1000)
                 .attr('transform', 'scale(' + k + ')translate(' + x + ',' + y + ')')
                 .style('stroke-width', 1.5 / k + 'px');
+
         }
     });
 </script>
