@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "MapOverlay";
+}
+@section header {
+    <style>
+        body { margin: 0;padding: 0; }
+        #map { position: absolute;top: 0;left: 0;right: 0;bottom: 0; }
+        #counties {
+            fill: #aaa;
+            fill-opacity: .7;
+            stroke: #fff;
+            stroke-width: 1.5px;
+            pointer-events: all;
+        }
+        #counties path:hover { fill-opacity: .95; cursor: pointer; }
+    </style>
+}
+
+<div id="map"></div>
+        
+        
+<script>
+    $(function () {
+        var map = L.map('map', {
+            center: new L.LatLng(27.8, -83.75),
+            zoom: 6,
+            minZoom: 6,
+            maxZoom: 9,
+            maxBounds: new L.LatLngBounds(new L.LatLng(19.062118, -98.217773),/*SW*/ new L.LatLng(35.245619, -71.455078)/*NE*/)
+        });
+        var tileLayer = new L.TileLayer('http://{s}.tile.cloudmade.com/cb9913802a4a4f22a59d13a2fbd73d70/999/256/{z}/{x}/{y}.png',
+            {
+                minZoom: 6,
+                maxZoom: 9
+            });
+        map.addLayer(tileLayer);
+
+        var svg = d3.select(map.getPanes().overlayPane).append('svg'),
+            g = svg.append('g').attr('class', 'leaflet-zoom-hide').attr('id', 'counties');
+
+
+        $.getJSON('/Content/FLCounties.topo.js', function(fl) {
+            var geoJson = topojson.object(fl, formatFLCounties(fl.objects.FLCounties)),
+                bounds = d3.geo.bounds(geoJson),
+                path = d3.geo.path().projection(project);
+
+            var feature = g.selectAll("path")
+                .data(geoJson.geometries)
+                .enter().append('path').on('click', clickCounty);
+
+            map.on('viewreset', reset);
+            reset();
+
+            function reset() {
+                var bottomLeft = project(bounds[0]),
+                    topRight = project(bounds[1]);
+
+                svg.attr('width', topRight[0] - bottomLeft[0])
+                    .attr('height', bottomLeft[1] - topRight[1])
+                    .style('margin-left', bottomLeft[0] + 'px')
+                    .style('margin-top', topRight[1] + 'px');
+
+                g.attr('transform', 'translate(' + -bottomLeft[0] + ',' + -topRight[1] + ')');
+
+                feature.attr('d', path);
+            }
+
+            function project(x) {
+                var point = map.latLngToLayerPoint(new L.LatLng(x[1], x[0]));
+                return [point.x, point.y];
+            }  
+                
+            function clickCounty(d) {
+                toastr.success(d.properties.name + ' County');
+            }
+        });
+
+        function formatFLCounties(fl) {
+            return fl;
+        }
+    });            
+</script>

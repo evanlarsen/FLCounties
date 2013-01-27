@@ -16,5 +16,14 @@ namespace TestingD3.Controllers
             return View();
         }
 
+        public ViewResult RawProjection()
+        {
+            return View();
+        }
+
+        public ViewResult MapOverlay()
+        {
+            return View();
+        }
     }
 }
