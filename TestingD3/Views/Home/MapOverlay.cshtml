@@ -63,7 +63,7 @@
 
             var feature = g.selectAll("path")
                 .data(geoJson.geometries)
-                .enter().append('path').on('mouseover', clickCounty);
+                .enter().append('path').on('mouseover', countyHover).on('mouseout', resetLegend);
 
             map.on('viewreset', reset);
             reset();
@@ -87,8 +87,11 @@
                 return [point.x, point.y];
             }  
                 
-            function clickCounty(d) {
+            function countyHover(d) {
                 info.update(d.properties);
+            }
+            function resetLegend() {
+                info.update();
             }
         });
 
