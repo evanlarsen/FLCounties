@@ -1,0 +1,5 @@
+﻿http://requirejs.org
+require : 2.1.2
+
+https://github.com/jrburke/almond
+almond : 0.2.3

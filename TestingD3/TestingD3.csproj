@@ -20,6 +20,8 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,6 +41,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="dotless.Core">
+      <HintPath>..\packages\dotless.1.3.1.0\lib\dotless.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -134,6 +139,90 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\FLCounties.topo.js" />
+    <TypeScriptCompile Include="Content\scripts\app\flcounties.ts" />
+    <TypeScriptCompile Include="Content\scripts\app\dom.ts" />
+    <Content Include="Content\images\libs\jquery\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\images\libs\jquery\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="Content\images\libs\jquery\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="Content\images\libs\jquery\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="Content\images\libs\jquery\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\images\libs\jquery\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="Content\images\libs\jquery\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="Content\images\libs\jquery\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Content\images\libs\jquery\ui-icons_217bc0_256x240.png" />
+    <Content Include="Content\images\libs\jquery\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\images\libs\jquery\ui-icons_469bdd_256x240.png" />
+    <Content Include="Content\images\libs\jquery\ui-icons_6da8d5_256x240.png" />
+    <Content Include="Content\images\libs\jquery\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\images\libs\jquery\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Content\images\libs\jquery\ui-icons_f9bd01_256x240.png" />
+    <Content Include="Content\images\libs\leaflet\layers.png" />
+    <Content Include="Content\images\libs\leaflet\marker-icon%402x.png" />
+    <Content Include="Content\images\libs\leaflet\marker-icon.png" />
+    <Content Include="Content\images\libs\leaflet\marker-shadow.png" />
+    <Content Include="Content\scripts\app\dom.js">
+      <DependentUpon>dom.ts</DependentUpon>
+    </Content>
+    <Content Include="Content\scripts\app\dom.min.js">
+      <DependentUpon>dom.ts</DependentUpon>
+    </Content>
+    <Content Include="Content\scripts\app\flcounties.html" />
+    <Content Include="Content\scripts\app\flcounties.js">
+      <DependentUpon>flcounties.ts</DependentUpon>
+    </Content>
+    <Content Include="Content\scripts\app\flcounties.min.js">
+      <DependentUpon>flcounties.ts</DependentUpon>
+    </Content>
+    <Content Include="Content\scripts\libs\amd\require.d.ts" />
+    <Content Include="Content\scripts\libs\amd\require.js" />
+    <Content Include="Content\scripts\libs\amd\require.min.js" />
+    <Content Include="Content\scripts\libs\amd\text.js" />
+    <Content Include="Content\scripts\libs\amd\version.txt" />
+    <Content Include="Content\scripts\libs\d3\d3.d.ts" />
+    <Content Include="Content\scripts\libs\d3\d3.js" />
+    <Content Include="Content\scripts\libs\d3\versions.txt" />
+    <Content Include="Content\scripts\libs\durandal\app.js" />
+    <Content Include="Content\scripts\libs\durandal\composition.js" />
+    <Content Include="Content\scripts\libs\durandal\durandal.d.ts" />
+    <Content Include="Content\scripts\libs\durandal\events.js" />
+    <Content Include="Content\scripts\libs\durandal\http.js" />
+    <Content Include="Content\scripts\libs\durandal\messageBox.html" />
+    <Content Include="Content\scripts\libs\durandal\messageBox.js" />
+    <Content Include="Content\scripts\libs\durandal\modalDialog.js" />
+    <Content Include="Content\scripts\libs\durandal\system.js" />
+    <Content Include="Content\scripts\libs\durandal\viewEngine.js" />
+    <Content Include="Content\scripts\libs\durandal\viewLocator.js" />
+    <Content Include="Content\scripts\libs\durandal\viewModel.js" />
+    <Content Include="Content\scripts\libs\durandal\viewModelBinder.js" />
+    <Content Include="Content\scripts\libs\durandal\widget.js" />
+    <Content Include="Content\scripts\libs\jquery\jquery-ui.js" />
+    <Content Include="Content\scripts\libs\jquery\jquery-ui.min.js" />
+    <Content Include="Content\scripts\libs\jquery\jquery.d.ts" />
+    <Content Include="Content\scripts\libs\jquery\jquery.min.js" />
+    <Content Include="Content\scripts\libs\jquery\versions.txt" />
+    <Content Include="Content\scripts\libs\knockout\knockout.d.ts" />
+    <Content Include="Content\scripts\libs\knockout\knockout.js" />
+    <Content Include="Content\scripts\libs\knockout\knockout.min.js" />
+    <Content Include="Content\scripts\libs\knockout\version.txt" />
+    <Content Include="Content\scripts\libs\leaflet\leaflet.js" />
+    <TypeScriptCompile Include="Content\scripts\libs\leaflet\leaflet.d.ts" />
+    <Content Include="Content\scripts\libs\modernizr\modernizr.d.ts" />
+    <Content Include="Content\scripts\libs\modernizr\version.txt" />
+    <TypeScriptCompile Include="Content\scripts\libs\topojson\topojson.d.ts" />
+    <Content Include="Content\scripts\libs\underscore\underscore.d.ts" />
+    <Content Include="Content\scripts\libs\underscore\underscore.js" />
+    <Content Include="Content\scripts\libs\underscore\underscore.min.js" />
+    <Content Include="Content\scripts\libs\underscore\version.txt" />
+    <Content Include="Content\scripts\main.js" />
+    <Content Include="Content\styles\jquery-ui.min.css" />
+    <Content Include="Content\styles\leaflet.css" />
+    <Content Include="Content\styles\leaflet.ie.css" />
+    <Content Include="Content\styles\MapOverlay.css">
+      <DependentUpon>MapOverlay.less</DependentUpon>
+    </Content>
+    <Content Include="Content\styles\MapOverlay.min.css">
+      <DependentUpon>MapOverlay.less</DependentUpon>
+    </Content>
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -194,29 +283,17 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
-    <Content Include="Content\toastr-responsive.css" />
-    <Content Include="Content\toastr.css" />
+    <Content Include="Content\styles\toastr-responsive.css" />
+    <Content Include="Content\styles\toastr.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <None Include="Scripts\jquery-1.8.2.intellisense.js" />
-    <Content Include="Scripts\d3.min.js" />
-    <Content Include="Scripts\jquery-1.8.2.js" />
-    <Content Include="Scripts\jquery-1.8.2.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery-ui-1.9.2.js" />
-    <Content Include="Scripts\jquery-ui-1.9.2.min.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\knockout-2.2.0.debug.js" />
-    <Content Include="Scripts\knockout-2.2.0.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\toastr.js" />
-    <Content Include="Scripts\topojson.js" />
-    <Content Include="Scripts\_references.js" />
+    <Content Include="Content\scripts\app\dom.js.map">
+      <DependentUpon>dom.ts</DependentUpon>
+    </Content>
+    <Content Include="Content\scripts\libs\d3\d3.min.js" />
+    <Content Include="Content\scripts\libs\modernizr\modernizr.js" />
+    <Content Include="Content\scripts\libs\jquery\plugins\toastr.js" />
+    <Content Include="Content\scripts\libs\topojson\topojson.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -238,6 +315,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\scripts\app\flcounties.js.map">
+      <DependentUpon>flcounties.ts</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\styles\MapOverlay.less" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -267,6 +352,7 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

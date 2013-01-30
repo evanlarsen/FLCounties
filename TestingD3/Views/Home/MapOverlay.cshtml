@@ -1,102 +1,10 @@
 ﻿@{
-    ViewBag.Title = "MapOverlay";
+    ViewBag.Title = "MapOverlayWithD3";
 }
 @section header {
-    <style>
-        body { margin: 0;padding: 0; }
-        #map { position: absolute;top: 0;left: 0;right: 0;bottom: 0; }
-        #counties {
-            fill: steelblue;
-            fill-opacity: .7;
-            stroke: #fff;
-            stroke-width: 1.5px;
-            pointer-events: all;
-            stroke-dasharray: 3;
-        }
-        #counties path:hover { fill-opacity: .95; cursor: pointer; color: #666; stroke-dasharray: none; stroke-width: 4px; }
-        .info { padding: 6px 8px; font-size: 14px; background: rgba(255,255,255,0.8); box-shadow: 0 0 15px rgba(0,0,0,0.2); border-radius: 5px; }
-        .info h4 { margin: 0 0 5px; color: #777; }
-    </style>
+    <link href="@Url.Content("~/Content/styles/MapOverlay.less")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/styles/jquery-ui.min.css")" rel="stylesheet" />
+    <script data-main="@Url.Content("~/Content/scripts/main")" src="@Url.Content("~/Content/scripts/libs/amd/require.js")"></script>
 }
 
-<div id="map"></div>
-        
-        
-<script>
-    $(function () {
-        var map = L.map('map', {
-            center: new L.LatLng(27.8, -83.75),
-            zoom: 6,
-            minZoom: 6,
-            maxZoom: 9,
-            maxBounds: new L.LatLngBounds(new L.LatLng(19.062118, -98.217773),/*SW*/ new L.LatLng(35.245619, -71.455078)/*NE*/)
-        });
-        var tileLayer = new L.TileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png',
-            {
-                key: 'cb9913802a4a4f22a59d13a2fbd73d70',
-                styleId: '22677', //999
-                minZoom: 6,
-                maxZoom: 9
-            });
-        map.addLayer(tileLayer);
-
-        var svg = d3.select(map.getPanes().overlayPane).append('svg'),
-            g = svg.append('g').attr('class', 'leaflet-zoom-hide').attr('id', 'counties');
-
-        var info = L.control();
-        info.onAdd = function(map) {
-            this._div = L.DomUtil.create('div', 'info');
-            this.update();
-            return this._div;
-        };
-        info.update = function(props) {
-            this._div.innerHTML = '<h4>Florida Counties</h4>' + (props ?
-				'<b>' + props.name + '</b><br />(' + props.county + ')'
-				: 'Hover over a state');
-        };
-        info.addTo(map);
-
-        $.getJSON('/Content/FLCounties.topo.js', function(fl) {
-            var geoJson = topojson.object(fl, formatFLCounties(fl.objects.FLCounties)),
-                bounds = d3.geo.bounds(geoJson),
-                path = d3.geo.path().projection(project);
-
-            var feature = g.selectAll("path")
-                .data(geoJson.geometries)
-                .enter().append('path').on('mouseover', countyHover).on('mouseout', resetLegend);
-
-            map.on('viewreset', reset);
-            reset();
-
-            function reset() {
-                var bottomLeft = project(bounds[0]),
-                    topRight = project(bounds[1]);
-
-                svg.attr('width', topRight[0] - bottomLeft[0])
-                    .attr('height', bottomLeft[1] - topRight[1])
-                    .style('margin-left', bottomLeft[0] + 'px')
-                    .style('margin-top', topRight[1] + 'px');
-
-                g.attr('transform', 'translate(' + -bottomLeft[0] + ',' + -topRight[1] + ')');
-
-                feature.attr('d', path);
-            }
-
-            function project(x) {
-                var point = map.latLngToLayerPoint(new L.LatLng(x[1], x[0]));
-                return [point.x, point.y];
-            }  
-                
-            function countyHover(d) {
-                info.update(d.properties);
-            }
-            function resetLegend() {
-                info.update();
-            }
-        });
-
-        function formatFLCounties(fl) {
-            return fl;
-        }
-    });            
-</script>
+<div id="applicationHost"></div>
